@@ -1,5 +1,5 @@
 from django.db import models
-from ckeditor.fields import RichTextField
+from django_ckeditor_5.fields import CKEditor5Field
 from category.models import Category
 
 
@@ -13,7 +13,7 @@ class News(models.Model):
 
     short_description = models.TextField(null=True, blank=True)
 
-    description = RichTextField()
+    description = CKEditor5Field('Text', config_name='extends')
 
     tags = models.CharField(max_length=500, null=True, blank=True)
 

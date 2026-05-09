@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'homepage',
-    'ckeditor',
+    'django_ckeditor_5',
     'news',
     'category',
 ]
@@ -70,6 +70,34 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'aaj_ka_mudda.wsgi.application'
 
+CKEDITOR_5_CONFIGS = {
+    'default': {
+        'toolbar': [
+            'heading', '|',
+            'bold', 'italic', 'link',
+            'bulletedList', 'numberedList', 'blockQuote',
+            'imageUpload',
+        ],
+    },
+    'extends': {
+        'blockToolbar': [
+            'paragraph', 'heading1', 'heading2', 'heading3',
+            '|',
+            'bulletedList', 'numberedList',
+            '|',
+            'blockQuote',
+        ],
+        'toolbar': [
+            'heading', '|',
+            'bold', 'italic', 'underline', 'strikethrough',
+            'link', 'insertImage', 'mediaEmbed',
+            'bulletedList', 'numberedList',
+            'blockQuote', 'codeBlock',
+            'undo', 'redo'
+        ],
+    },
+}
+
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
@@ -85,9 +113,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'aaj_ka_mudda',
-        'USER': 'sanjay',
+        'USER': 'root',
         'PASSWORD': 'Hello123456#',
-        'HOST': 'localhost',
+        'HOST': '103.138.96.107',
         'PORT': '3306',
     }
 }
