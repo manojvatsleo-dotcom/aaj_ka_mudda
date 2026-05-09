@@ -1,0 +1,434 @@
+<!-- templates/news_detail.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+
+<style>
+    /* NEWS DETAIL */
+
+    .news-detail-card{
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    }
+
+    .detail-category{
+    background: red;
+    color: white;
+    padding: 6px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    }
+
+    .detail-title{
+    font-size: 42px;
+    font-weight: bold;
+    margin-top: 20px;
+    line-height: 1.4;
+    }
+
+    .news-meta{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    color: #666;
+    margin: 20px 0;
+    }
+
+    .detail-image{
+    width: 100%;
+    border-radius: 10px;
+    max-height: 500px;
+    object-fit: cover;
+    }
+
+    .short-description{
+    margin-top: 20px;
+    font-size: 20px;
+    color: #222;
+    line-height: 1.8;
+    }
+
+    .news-content-area{
+    margin-top: 25px;
+    font-size: 18px;
+    line-height: 2;
+    color: #333;
+    }
+
+    .news-content-area p{
+    margin-bottom: 20px;
+    }
+
+    .news-content-area img{
+    max-width: 100%;
+    border-radius: 10px;
+    margin: 20px 0;
+    }
+
+    /* TAGS */
+
+    .news-tag{
+    display: inline-block;
+    background: #f1f1f1;
+    padding: 8px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #222;
+    }
+
+    /* SHARE */
+
+    .share-box{
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+    }
+
+    .share-btn{
+    width: 45px;
+    height: 45px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: white;
+    margin-right: 10px;
+    text-decoration: none;
+    }
+
+    .fb{
+    background: #1877f2;
+    }
+
+    .tw{
+    background: black;
+    }
+
+    .wa{
+    background: #25d366;
+    }
+
+    .tg{
+    background: #0088cc;
+    }
+
+    /* SIDEBAR */
+
+    .sidebar-news-title{
+    color: black;
+    text-decoration: none;
+    font-weight: 600;
+    }
+
+    .category-list{
+    list-style: none;
+    padding: 0;
+    }
+
+    .category-list li{
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+    }
+
+    .category-list a{
+    text-decoration: none;
+    color: #222;
+    }
+
+    /* RELATED */
+
+    .section-title{
+    font-size: 28px;
+    margin-bottom: 25px;
+    border-left: 5px solid red;
+    padding-left: 10px;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:768px){
+
+    .detail-title{
+    font-size: 28px;
+    }
+
+    .news-content-area{
+    font-size: 16px;
+    line-height: 1.8;
+    }
+
+    }
+</style>
+
+
+{% endblock %}
+{% block title %}
+{{news.title}} | News Channel
+{% endblock %}
+
+{% block description %}
+{{news.short_description}}
+{% endblock %}
+
+{% block keywords %}
+{{news.tags}}
+{% endblock %}
+
+{% block og_title %}
+{{news.title}}
+{% endblock %}
+
+{% block og_description %}
+{{news.short_description}}
+{% endblock %}
+
+{% block og_image %}
+{{news.image.url}}
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+
+    <!-- MAIN NEWS -->
+    <div class="col-lg-8">
+
+        <article class="news-detail-card">
+
+            <!-- CATEGORY -->
+            <div class="mb-3">
+
+                <a href="#"
+                   class="detail-category">
+
+                    {{news.category.name}}
+
+                </a>
+
+            </div>
+
+            <!-- TITLE -->
+            <h1 class="detail-title">
+                {{news.title}}
+            </h1>
+
+            <!-- META -->
+            <div class="news-meta">
+
+                    <span>
+                        <i class="fa fa-user"></i>
+                        Admin
+                    </span>
+
+                <span>
+                        <i class="fa fa-calendar"></i>
+                        {{news.created_at}}
+                    </span>
+
+                <span>
+                        <i class="fa fa-eye"></i>
+                        {{news.views}} Views
+                    </span>
+
+            </div>
+
+            <!-- IMAGE -->
+            <div class="detail-image-box">
+
+                <img src="{{news.image.url}}"
+                     alt="{{news.title}}"
+                     class="img-fluid detail-image">
+
+            </div>
+
+            <!-- SHORT DESCRIPTION -->
+            <div class="short-description">
+
+                <strong>
+                    {{news.short_description}}
+                </strong>
+
+            </div>
+
+            <!-- CONTENT -->
+            <div class="news-content-area">
+
+                {{news.description|safe}}
+
+            </div>
+
+            <!-- TAGS -->
+            <div class="tags-area mt-4">
+
+                <h5>Tags:</h5>
+
+                <a href="#" class="news-tag">
+                    Breaking
+                </a>
+
+                <a href="#" class="news-tag">
+                    Politics
+                </a>
+
+                <a href="#" class="news-tag">
+                    India
+                </a>
+
+            </div>
+
+            <!-- SOCIAL SHARE -->
+            <div class="share-box mt-4">
+
+                <h5>Share News:</h5>
+
+                <a href="#" class="share-btn fb">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+
+                <a href="#" class="share-btn tw">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
+
+                <a href="#" class="share-btn wa">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+
+                <a href="#" class="share-btn tg">
+                    <i class="fab fa-telegram"></i>
+                </a>
+
+            </div>
+
+        </article>
+
+        <!-- RELATED NEWS -->
+        <div class="related-news-section mt-5">
+
+            <h3 class="section-title">
+                Related News
+            </h3>
+
+            <div class="row g-4">
+
+                {% for item in related_news %}
+
+                <div class="col-md-6">
+
+                    <div class="news-card">
+
+                        <img src="{{item.image.url}}"
+                             class="img-fluid">
+
+                        <div class="news-content">
+
+                                <span class="news-category">
+                                    {{item.category.name}}
+                                </span>
+
+                            <h3>
+                                {{item.title|truncatewords:10}}
+                            </h3>
+
+                            <p>
+                                {{item.short_description|truncatewords:15}}
+                            </p>
+
+                            <a href="/news/{{i.id}}/"
+                               class="read-more">
+
+                                Read More
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="col-lg-4">
+
+        <!-- TRENDING NEWS -->
+        <div class="sidebar-box">
+
+            <h4 class="sidebar-title">
+                Trending News
+            </h4>
+
+            {% for item in trending_news %}
+
+            <div class="trending-news">
+
+                <img src="{{item.image.url}}">
+
+                <div>
+
+                    <a href="/news/{{i.id}}/"
+                       class="sidebar-news-title">
+
+                        {{item.title|truncatewords:8}}
+
+                    </a>
+
+                    <small>
+                        {{item.created_at}}
+                    </small>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- CATEGORY -->
+        <div class="sidebar-box mt-4">
+
+            <h4 class="sidebar-title">
+                Categories
+            </h4>
+
+            <ul class="category-list">
+
+                {% for category in categories %}
+
+                <li>
+
+                    <a href="#">
+                        {{category.name}}
+                    </a>
+
+                </li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+        <!-- ADS -->
+        <div class="sidebar-box mt-4">
+
+            <img src="https://via.placeholder.com/350x300"
+                 class="img-fluid rounded">
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
